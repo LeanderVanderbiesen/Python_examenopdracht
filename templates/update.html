@@ -1,0 +1,44 @@
+{% extends "master.html" %}
+
+{% block title %} Update {% endblock %}
+
+{% block style %}
+	body{
+			background-color: {{color}}
+		}
+{% endblock%}
+
+{% block content %}
+
+<form action="" method="POST">
+
+	<a href="/home/{{name}}">Back to Homepage</a>
+	<p>Edit the data:</p>
+
+	{% for line in prizeWinner%}
+		<label for="year">Year:</label>
+		<input type="text" value="{{ line[1] }}" name="year">
+
+		<label for="category">Category:</label>
+		<input type="text" value="{{ line[2] }}" name="category">
+
+		<label for="overallMotivation">Overall motivation:</label>
+		<input type="text" value="{{ line[7] }}" name="overallMotivation">
+
+		<label for="firstname">Firstname:</label>
+		<input type="text" value="{{ line[3] }}" name="firstname">
+
+		<label for="surname">Surname:</label>
+		<input type="text" value="{{ line[4] }}" name="surname">
+
+		<label for="share">Share:</label>
+		<input type="text" value="{{ line[5] }}" name="share">
+
+		<label for="motivation">Motivation:</label>
+		<input type="text" value="{{ line[6] }}" name="motivation">
+	{% endfor %}
+	
+	<input type="submit" name="submit" id="submit" value="Update data">
+
+</form>
+{% endblock %}

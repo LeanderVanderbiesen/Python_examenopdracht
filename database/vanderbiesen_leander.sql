@@ -1,0 +1,12 @@
+BEGIN TRANSACTION;
+CREATE TABLE IF NOT EXISTS `nobelPrize` (
+	`id`	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	`year`	INTEGER NOT NULL,
+	`category`	TEXT NOT NULL,
+	`firstname`	TEXT NOT NULL,
+	`surname`	TEXT NOT NULL,
+	`share`	INTEGER NOT NULL,
+	`motivation`	TEXT,
+	`overallMotivation`	TEXT
+);
+COMMIT;

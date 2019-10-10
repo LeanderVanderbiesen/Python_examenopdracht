@@ -1,0 +1,75 @@
+{% extends "master.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block style %}
+	body{
+		background-color: {{ color }}
+	}
+	.hidden{
+		display: none;
+	}
+	.show{
+		display: block;
+	}
+{% endblock%}
+
+{% block content%}
+	<a href="/">Back to login</a>
+
+	{% if name %}
+		<p>Hello, {{ name }}</p>
+	{% endif %}
+
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for message in messages %}
+				<li>{{message}}</li>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+	<li>U have logged in {{ numberOfLogins }} times</li>
+	
+	<form action="" method="POST">
+
+		<p>Choose your backgroundcolor:</p>
+
+		<select name="colors" value="Colors">
+		  <option name="Lightgray" style="background-color:lightgray" value="lightgray">lightgray</option>
+		  <option value="LightBlue" style="background-color:lightblue" name="lightblue">LightBlue</option>
+		  <option value="Green" style="background-color:green" name="green">Green</option>
+		  <option value="Yellow" style="background-color:yellow" name="yellow">Yellow</option>
+		</select>
+
+		<input type="submit" name="submit" value="Change color">
+
+		<div class="{% if namesWinners %}hidden{%endif %}">
+			<p>Request Nobelprize data from database: </p>
+			<input type="submit" name="submit" value="Request Nobelprize data">
+		</div>
+		
+	</form>
+	
+	{% if namesWinners %}
+		<table class="table table-hover table-bordered">
+			<p>List of Nobelprize winners:</p>
+				<thead>
+					<tr>
+						<th scope="col">Year </th>
+						<th scope="col">Name</th>
+						<th scope="col">More information</th>
+					</tr>
+				</thead>
+				{% for line in namesWinners	 %}
+					<tbody>
+						<tr>
+							<td scope="row">{{ line[1] }}</td>
+							<td>{{ line[2] }}</td>
+							<td><a href="{{ url_for('prizewinner', id=line[0]) }}">More information about {{ line[2] }}</a></td>
+						</tr>
+					</tbody>
+				{% endfor %}
+		</table>
+	{% endif %} 
+{% endblock %}
